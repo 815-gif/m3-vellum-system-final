@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>M3 Vellum - System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-sakura">
+    <div id="system-flash"></div>
+    <div class="cherry-container" id="cherry-bg"></div>
+
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="icon-512.png" alt="System Icon" class="splash-logo">
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+            <p class="splash-text">ESTABLECIENDO CONEXIÓN NEURONAL...</p>
+        </div>
+    </div>
+
+    <section id="pane-home" class="pane">
+        <div class="home-hero-card">
+            <div class="hero-header">
+                <h1 class="system-title">ESTADO DEL JUGADOR</h1>
+                <div class="streak-badge-modern">
+                    <span class="fire-icon">🔥</span>
+                    <div class="streak-data">
+                        <span id="streak-count-display">0</span>
+                        <small>DÍAS DE RACHA</small>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-box-modern">
+                <p id="daily-quote">"El límite solo existe si decides aceptarlo."</p>
+            </div>
+        </div>
+
+        <div class="stats-grid-modern">
+            <div class="stat-item-modern">
+                <div class="stat-icon">📚</div>
+                <div class="stat-info">
+                    <span class="stat-label">BIBLIOTECA</span>
+                    <span class="stat-number" id="total-count-home">0</span>
+                </div>
+            </div>
+            <div class="stat-item-modern rank-highlight">
+                <div class="stat-icon">🎖️</div>
+                <div class="stat-info">
+                    <span class="stat-label">CATEGORÍA</span>
+                    <span class="stat-number" id="rank-display">RANGO E</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mission-card-modern">
+            <div class="mission-tag">MISIÓN ACTIVA</div>
+            <h3>ENTRENAMIENTO DIARIO</h3>
+            <p>Lee 1 capítulo para obtener recompensas de XP.</p>
+            <button onclick="switchPane('library')" class="btn-system-action">ACCEDER AL ÁREA</button>
+        </div>
+    </section>
+
+    <section id="pane-library" class="pane hidden">
+        <div class="lib-header">
+            <h2 class="system-title">REGISTROS DE CAZADOR</h2>
+            <div class="search-wrapper">
+                <input type="text" id="input-search" placeholder="Buscar rastro de Manhwa...">
+            </div>
+        </div>
+        <div id="manhwa-display" class="view-grid"></div>
+    </section>
+
+    <section id="pane-profile" class="pane hidden">
+        <div class="profile-card-modern">
+            <div class="profile-header-main">
+                <div class="avatar-wrapper">
+                    <div class="avatar-aura" id="avatar-aura-effect"></div>
+                    <img id="user-avatar" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Lucky&backgroundColor=b6e3f4" alt="Avatar Cute">
+                    <div class="level-tag-modern">NV.<span id="user-level">1</span></div>
+                </div>
+                <div class="player-identity">
+                    <h2 id="player-name">CAZADOR</h2>
+                    <div id="player-title" class="title-badge-gold">INICIADO</div>
+                </div>
+            </div>
+
+<div class="content-box">
+    <h4 class="box-title">🐾 VITALIDAD MASCOTA</h4>
+    <div class="xp-bar-container" style="background: rgba(255,255,255,0.1)">
+        <div id="energy-fill" class="xp-bar-fill" style="width: 100%; background: #4caf50;"></div>
+    </div>
+</div>
+            <div class="xp-container-modern">
+                <div class="xp-header">
+                    <span>PUNTOS DE EXPERIENCIA</span>
+                    <span id="current-xp">0</span>/100
+                </div>
+                <div class="xp-bar-container">
+                    <div id="xp-fill" class="xp-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="profile-content-grid">
+                <div class="content-box">
+                    <h4 class="box-title">🏆 LOGROS DE CLASE</h4>
+                    <div id="titles-history-list" class="scroll-area-cute">
+                        </div>
+                </div>
+                <div class="content-box">
+                    <h4 class="box-title">📜 CRONOLOGÍA</h4>
+                    <div id="milestones-list" class="scroll-area-cute">
+                        </div>
+                </div>
+            </div>
+
+            <div class="settings-modern-panel">
+                <h4 class="box-title">⚙️ INTERFAZ</h4>
+                <div class="setting-item-modern">
+                    <label>FONDOS</label>
+                    <select id="bg-selector" class="system-select">
+                        <option value="sakura">🌸 PÉTALOS</option>
+                        <option value="dungeon">🐉 MAZMORRA</option>
+                        <option value="stars">✨ GALAXIA</option>
+                    </select>
+                </div>
+                <button id="btn-google" class="btn-google-modern">VINCULAR ALMA CON GOOGLE</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="form-overlay" class="overlay hidden">
+        <div class="modal system-modal">
+            <button class="close-modal-btn" id="close-form" type="button">✕</button>
+            <div class="form-scroll">
+                <h2 class="form-header">REGISTRAR ENTRADA</h2>
+                
+                <div class="input-group">
+                    <label>PORTADA (SUBIR ARCHIVO)</label>
+                    <input type="file" id="input-file" class="system-input" accept="image/*">
+                </div>
+
+                <input type="text" id="input-title" class="system-input" placeholder="NOMBRE DEL MANHWA">
+                
+                <div class="input-row">
+                    <input type="text" id="input-author" class="system-input" placeholder="AUTOR">
+                    <input type="text" id="input-genres" class="system-input" placeholder="GÉNEROS">
+                </div>
+
+                <div class="input-row">
+                    <input type="number" id="input-current-cap" class="system-input" placeholder="CAP. ACTUAL">
+                    <input type="number" id="input-total-cap" class="system-input" placeholder="CAP. TOTAL">
+                </div>
+
+                <div class="input-group">
+                    <label>VALORACIÓN PERSONAL</label>
+                    <input type="number" id="input-rating" step="0.1" max="5" class="system-input" placeholder="0.0 - 5.0">
+                </div>
+
+                <button id="save-btn" class="btn-save-modern">CONFIRMAR REGISTRO</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="details-overlay" class="overlay hidden">
+        <div class="modal" id="detail-content">
+            </div>
+    </div>
+
+    <audio id="system-audio" loop></audio>
+    <audio id="lvl-up-sound" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+
+    <nav class="bottom-nav">
+        <button onclick="switchPane('home')" id="nav-home" class="nav-item active">🏠</button>
+        <button onclick="switchPane('library')" id="nav-library" class="nav-item">📚</button>
+        <button onclick="switchPane('profile')" id="nav-profile" class="nav-item">👤</button>
+    </nav>
+
+    <button id="open-form-btn" class="float-btn">+</button>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBsMaxIU-wDJPIEyQyO-jsyZgR7ZKB-_h0",
+            authDomain: "manhwacloudv2.firebaseapp.com",
+            projectId: "manhwacloudv2",
+            storageBucket: "manhwacloudv2.firebasestorage.app",
+            messagingSenderId: "388201733980",
+            appId: "1:388201733980:web:9949d4f5fb0581a9526b99"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        document.getElementById('btn-google').onclick = async () => {
+            try { await signInWithPopup(auth, provider); } 
+            catch (e) { alert("Fallo de sincronización: " + e.message); }
+        };
+
+        window.subirALaNube = async (l) => {
+            if (auth.currentUser) await setDoc(doc(db, "usuarios", auth.currentUser.uid), { 
+                manhwas: l,
+                titulos: JSON.parse(localStorage.getItem('titulosObtenidos')) || [] 
+            }, { merge: true });
+        };
+
+        onAuthStateChanged(auth, async (u) => {
+            if (u) {
+                document.getElementById('player-name').innerText = u.displayName.toUpperCase();
+                // Si el usuario tiene foto de Google la usamos, si no, el sistema generará un gatito adorable
+                if(u.photoURL) document.getElementById('user-avatar').src = u.photoURL;
+                
+                const s = await getDoc(doc(db, "usuarios", u.uid));
+                if (s.exists()) {
+                    if (s.data().manhwas && window.fusionarDatos) window.fusionarDatos(s.data().manhwas);
+                }
+            }
+        });
+    </script>
+    <script src="script.js" defer></script>
+</body>
+</html>
